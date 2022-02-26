@@ -8,11 +8,12 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Setting from "./components/Setting/Setting";
-import {StateType} from "./redux/state";
+import {StateType, updateNewPostText} from "./redux/state";
 
 type AppType = {
     state: StateType
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
 }
 
 function App(props: AppType) {
@@ -37,6 +38,7 @@ function App(props: AppType) {
                                 <Profile
                                     stateProfile={props.state.profilePage}
                                     addPost={props.addPost}
+                                    updateNewPostText={props.updateNewPostText}
                                 />
                             }
                         />
