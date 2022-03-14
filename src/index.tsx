@@ -1,5 +1,5 @@
 import React from 'react';
-import {addPost, state, subscribe, updateNewPostText} from "./redux/state";
+import {store} from "./redux/state";
 import reportWebVitals from "./reportWebVitals";
 import ReactDOM from "react-dom";
 import App from "./App";
@@ -7,9 +7,10 @@ import App from "./App";
 export const rerenderEntireTree = () => {
     ReactDOM.render(
         <App
-            state={state}
-            addPost={addPost}
-            updateNewPostText={updateNewPostText}
+            /*state={store.getState()}
+            addPost={store.addPost}
+            updateNewPostText={store.updateNewPostText}*/
+            store={store}
         />,
         document.getElementById('root')
     );
@@ -17,7 +18,7 @@ export const rerenderEntireTree = () => {
 
 rerenderEntireTree()
 
-subscribe(rerenderEntireTree)
+store.subscribe(rerenderEntireTree)
 
 
 reportWebVitals();
