@@ -23,14 +23,10 @@ export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsPageType
 }
-type AddPostAT = {
-    type: 'ADD-POST'
-}
-type UpdateNewPostTextAT = {
-    type: 'UPDATE-NEW-POST-TEXT'
-    newText: string
-}
-export type ActionsType = AddPostAT | UpdateNewPostTextAT
+
+export type ActionsType = ReturnType<typeof addPostAC>
+    | ReturnType<typeof onPostChangeAC>
+
 export type StoreType = {
     _state: StateType
     _callSubscriber: () => void
@@ -91,5 +87,16 @@ export const store: StoreType = {
     },
 }
 
-//store - OOP
+export const addPostAC = () => {
+    return {
+        type: 'ADD-POST'
+    } as const
+}
+export const onPostChangeAC = (newText: string) => {
+    return {
+        type: 'UPDATE-NEW-POST-TEXT',
+        newText
+    } as const
+}
+
 
