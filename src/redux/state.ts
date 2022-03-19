@@ -9,7 +9,7 @@ type DialogType = {
 }
 type MessageType = {
     id: number
-    name: string
+    message: string
 }
 export type ProfilePageType = {
     posts: PostType[]
@@ -17,6 +17,7 @@ export type ProfilePageType = {
 }
 export type DialogsPageType = {
     messages: MessageType[]
+    newMessageBody: string
     dialogs: DialogType[]
 }
 export type StateType = {
@@ -26,6 +27,8 @@ export type StateType = {
 
 export type ActionsType = ReturnType<typeof addPostAC>
     | ReturnType<typeof onPostChangeAC>
+    | ReturnType<typeof updateNewMessageBodyAC>
+    | ReturnType<typeof sendMessageAC>
 
 export type StoreType = {
     _state: StateType
@@ -46,18 +49,19 @@ export const store: StoreType = {
         },
         dialogsPage: {
             messages: [
-                {id: 1, name: 'Hi!'},
-                {id: 2, name: 'How are you?'},
-                {id: 3, name: 'What do you do?'},
-                {id: 4, name: 'Yo'},
-                {id: 5, name: 'Yo'}
+                {id: 1, message: 'Hi!'},
+                {id: 2, message: 'How are you?'},
+                {id: 3, message: 'What do you do?'},
+                {id: 4, message: 'Yo'},
+                {id: 5, message: 'Yo'},
             ],
+            newMessageBody: '',
             dialogs: [
                 {id: 1, name: 'Max'},
                 {id: 2, name: 'Bob'},
                 {id: 3, name: 'Rob'},
                 {id: 4, name: 'Sasha'},
-                {id: 5, name: 'Dima'}
+                {id: 5, name: 'Dima'},
             ]
         }
     },
@@ -76,6 +80,14 @@ export const store: StoreType = {
             this._callSubscriber()
         } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
             this._state.profilePage.newPostText = action.newText
+            this._callSubscriber()
+        } else if (action.type === 'UPDATE-NEW-MESSAGE-BODY') {
+            this._state.dialogsPage.newMessageBody = action.body
+            this._callSubscriber()
+        } else if (action.type === 'SEND-MESSAGE') {
+            const body = this._state.dialogsPage.newMessageBody
+            this._state.dialogsPage.messages.push({id: 6, message: body})
+            this._state.dialogsPage.newMessageBody = ''
             this._callSubscriber()
         }
     },
@@ -98,5 +110,17 @@ export const onPostChangeAC = (newText: string) => {
         newText
     } as const
 }
+export const updateNewMessageBodyAC = (body: string) => {
+    return {
+        type: 'UPDATE-NEW-MESSAGE-BODY',
+        body
+    } as const
+}
+export const sendMessageAC = () => {
+    return {
+        type: 'SEND-MESSAGE'
+    } as const
+}
+
 
 

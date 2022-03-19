@@ -29,6 +29,7 @@ function App(props: AppType) {
                             element={
                                 <Dialogs
                                     stateDialogs={state.dialogsPage}
+                                    dispatch={props.store.dispatch.bind(props.store)}
                                 />
                             }
                         />
