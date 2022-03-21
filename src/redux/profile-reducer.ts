@@ -1,10 +1,15 @@
-import {PostType, ProfilePageType} from "./state";
+import {PostType, ProfilePageType} from "./store";
 import {DialogsAT} from "./dialogs-reducer";
 
-export type ProfileAT = ReturnType<typeof addPostAC>
-    | ReturnType<typeof onPostChangeAC>
+const initialState = {
+    posts: [
+        {id: 1, message: 'Hi, how are you?', likesCount: 15},
+        {id: 2, message: "It's my first post", likesCount: 20}
+    ],
+    newPostText: 'NEW POST',
+}
 
-export const profileReducer = (state: ProfilePageType, action: ProfileAT | DialogsAT): ProfilePageType => {
+export const profileReducer = (state: ProfilePageType = initialState, action: ProfileAT | DialogsAT): ProfilePageType => {
     switch (action.type) {
         case "ADD-POST":
             const newPost: PostType = {
@@ -34,3 +39,6 @@ export const onPostChangeAC = (newText: string) => {
         newText
     } as const
 }
+
+export type ProfileAT = ReturnType<typeof addPostAC>
+    | ReturnType<typeof onPostChangeAC>

@@ -45,7 +45,7 @@ export const store: StoreType = {
                 {id: 1, message: 'Hi, how are you?', likesCount: 15},
                 {id: 2, message: "It's my first post", likesCount: 20}
             ],
-            newPostText: 'NEW POST'
+            newPostText: 'NEW POST',
         },
         dialogsPage: {
             messages: [
@@ -62,7 +62,7 @@ export const store: StoreType = {
                 {id: 3, name: 'Rob'},
                 {id: 4, name: 'Sasha'},
                 {id: 5, name: 'Dima'},
-            ]
+            ],
         },
         sidebar: {},
     },
