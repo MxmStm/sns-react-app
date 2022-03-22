@@ -1,17 +1,10 @@
 import React from "react";
 import s from './MyPosts.module.css';
 import {Post} from "./Post/Post";
-import {PostType} from "../../../redux/store";
+import {MapPropsMyPostType} from "./MyPostsContainer";
 
-type MyPostsType = {
-    updateNewPostText: (text: string) => void
-    addPost: () => void
-    statePosts: PostType[]
-    newPostText: string
-}
-
-export const MyPosts = (props: MyPostsType) => {
-    const postsElements = props.statePosts.map(p =>
+export const MyPosts = (props: MapPropsMyPostType) => {
+    const postsElements = props.profilePage.posts.map(p =>
         <Post message={p.message} likesCount={p.likesCount}/>)
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
@@ -35,7 +28,7 @@ export const MyPosts = (props: MyPostsType) => {
                     <textarea
                         ref={newPostElement}
                         onChange={onPostChange}
-                        value={props.newPostText}
+                        value={props.profilePage.newPostText}
                     />
                 </div>
                 <div>

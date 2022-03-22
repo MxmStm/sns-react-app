@@ -1,25 +1,35 @@
-import {DialogsPageType} from "./store";
 import {ProfileAT} from "./profile-reducer";
 
-const initialState = {
+type MessageType = {
+    id: number
+    message: string
+}
+type DialogType = {
+    id: number
+    name: string
+}
+
+const initialDialogsState = {
     messages: [
         {id: 1, message: 'Hi!'},
         {id: 2, message: 'How are you?'},
         {id: 3, message: 'What do you do?'},
         {id: 4, message: 'Yo'},
         {id: 5, message: 'Yo'},
-    ],
-    newMessageBody: '',
+    ] as MessageType[],
+    newMessageBody: '' as string,
     dialogs: [
         {id: 1, name: 'Max'},
         {id: 2, name: 'Bob'},
         {id: 3, name: 'Rob'},
         {id: 4, name: 'Sasha'},
         {id: 5, name: 'Dima'},
-    ],
+    ] as DialogType[],
 }
 
-export const dialogsReducer = (state: DialogsPageType = initialState, action: ProfileAT | DialogsAT): DialogsPageType => {
+export type InitialDialogsStateType = typeof initialDialogsState
+
+export const dialogsReducer = (state: InitialDialogsStateType = initialDialogsState, action: ProfileAT | DialogsAT): InitialDialogsStateType => {
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
             state.newMessageBody = action.body

@@ -1,31 +1,33 @@
-import React, {ChangeEvent} from "react";
-import {sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
+import {ChangeEvent} from "react";
+import {InitialDialogsStateType, sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
-import {StoreContext} from "../../StoreContext";
+import {connect} from "react-redux";
+import {AppStateType} from "../../redux/redux-store";
+import {Dispatch} from "redux";
 
-export const DialogsContainer = () => {
-    return (
-        <StoreContext.Consumer>
-            {
-                (store) => {
-                    const state = store.getState().dialogsPage
-
-                    const onSendMessageClick = () => {
-                        store.dispatch(sendMessageAC())
-                    }
-                    const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-                        store.dispatch(updateNewMessageBodyAC(e.target.value))
-                    }
-
-                    return (
-                        <Dialogs
-                            sendMessage={onSendMessageClick}
-                            updateNewMessageBody={onNewMessageChange}
-                            dialogsPage={state}
-                        />
-                    )
-                }
-            }
-        </StoreContext.Consumer>
-    )
+type MapStatePropsType = {
+    dialogsPage: InitialDialogsStateType
 }
+type MapDispatchPropsType = {
+    sendMessage: () => void
+    updateNewMessageBody: (e: ChangeEvent<HTMLTextAreaElement>) => void
+}
+export type MapPropsDialogsType = MapStatePropsType & MapDispatchPropsType
+
+const mapStateToProps = (state: AppStateType): MapStatePropsType => {
+    return {
+        dialogsPage: state.dialogsPage,
+    }
+}
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
+    return {
+        sendMessage: () => {
+            dispatch(sendMessageAC())
+        },
+        updateNewMessageBody: (e: ChangeEvent<HTMLTextAreaElement>) => {
+            dispatch(updateNewMessageBodyAC(e.target.value))
+        },
+    }
+}
+
+export const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)

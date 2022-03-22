@@ -6,8 +6,10 @@ import {sidebarReducer} from "./sidebar-reducer";
 const rootReducer = combineReducers({
     profilePage: profileReducer,
     dialogsPage: dialogsReducer,
-    sidebar: sidebarReducer,
+    // sidebar: sidebarReducer,
 })
+
+export type AppStateType = ReturnType<typeof rootReducer>
 
 export const store = createStore(rootReducer)
 

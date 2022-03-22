@@ -1,23 +1,29 @@
-import {PostType, ProfilePageType} from "./store";
 import {DialogsAT} from "./dialogs-reducer";
 
-const initialState = {
+type PostType = {
+    id: number
+    message: string
+    likesCount: number
+}
+
+const initialProfileState = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 15},
         {id: 2, message: "It's my first post", likesCount: 20}
-    ],
-    newPostText: 'NEW POST',
+    ] as PostType[],
+    newPostText: 'NEW POST' as string,
 }
 
-export const profileReducer = (state: ProfilePageType = initialState, action: ProfileAT | DialogsAT): ProfilePageType => {
+export type InitialProfileStateType = typeof initialProfileState
+
+export const profileReducer = (state: InitialProfileStateType = initialProfileState, action: ProfileAT | DialogsAT): InitialProfileStateType => {
     switch (action.type) {
         case "ADD-POST":
-            const newPost: PostType = {
+            state.posts.push({
                 id: 5,
                 message: state.newPostText,
                 likesCount: 0
-            }
-            state.posts.push(newPost)
+            })
             state.newPostText = ''
             return state
         case "UPDATE-NEW-POST-TEXT":
