@@ -7,14 +7,9 @@ import {BrowserRouter, Route, Routes} from "react-router-dom";
 import News from "./components/News/News";
 import Music from "./components/Music/Music";
 import Setting from "./components/Setting/Setting";
-import {StoreType} from "./redux/store";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
-type AppType = {
-    store: StoreType
-}
-
-function App(props: AppType) {
+function App() {
     return (
         <BrowserRouter>
             <div className={'app-wrapper'}>
@@ -25,17 +20,13 @@ function App(props: AppType) {
                         <Route
                             path={'/Dialogs/*'}
                             element={
-                                <DialogsContainer
-                                    store={props.store}
-                                />
+                                <DialogsContainer/>
                             }
                         />
                         <Route
                             path={'/Profile'}
                             element={
-                                <Profile
-                                    store={props.store}
-                                />
+                                <Profile/>
                             }
                         />
                         <Route path={'/News'} element={<News/>}/>

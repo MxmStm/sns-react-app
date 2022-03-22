@@ -3,11 +3,17 @@ import {store} from "./redux/store";
 import reportWebVitals from "./reportWebVitals";
 import ReactDOM from "react-dom";
 import App from "./App";
+import {Provider} from './StoreContext';
 
 export const rerenderEntireTree = () => {
     ReactDOM.render(
-        <App store={store}/>,
-        document.getElementById('root')
+        /*<StoreContext.Provider value={store}>
+            <App />
+        </StoreContext.Provider>*/
+        <Provider store={store}>
+            <App/>
+        </Provider>
+        , document.getElementById('root')
     );
 }
 
