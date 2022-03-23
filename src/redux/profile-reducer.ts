@@ -19,14 +19,13 @@ export type InitialProfileStateType = typeof initialProfileState
 export const profileReducer = (state: InitialProfileStateType = initialProfileState, action: ProfileAT | DialogsAT): InitialProfileStateType => {
     switch (action.type) {
         case "ADD-POST":
-            const newPost: PostType = {
-                id: 5,
-                message: state.newPostText,
-                likesCount: 0
-            }
             return {
                 ...state,
-                posts: [...state.posts, newPost],
+                posts: [...state.posts, {
+                    id: 5,
+                    message: state.newPostText,
+                    likesCount: 0
+                }],
                 newPostText: ''
             }
         case "UPDATE-NEW-POST-TEXT":
