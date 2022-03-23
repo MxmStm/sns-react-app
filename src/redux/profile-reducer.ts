@@ -9,7 +9,7 @@ type PostType = {
 const initialProfileState = {
     posts: [
         {id: 1, message: 'Hi, how are you?', likesCount: 15},
-        {id: 2, message: "It's my first post", likesCount: 20}
+        {id: 2, message: "It's my first post", likesCount: 20},
     ] as PostType[],
     newPostText: 'NEW POST' as string,
 }
@@ -19,16 +19,21 @@ export type InitialProfileStateType = typeof initialProfileState
 export const profileReducer = (state: InitialProfileStateType = initialProfileState, action: ProfileAT | DialogsAT): InitialProfileStateType => {
     switch (action.type) {
         case "ADD-POST":
-            state.posts.push({
+            const newPost: PostType = {
                 id: 5,
                 message: state.newPostText,
                 likesCount: 0
-            })
-            state.newPostText = ''
-            return state
+            }
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: ''
+            }
         case "UPDATE-NEW-POST-TEXT":
-            state.newPostText = action.newText
-            return state
+            return {
+                ...state,
+                newPostText: action.newText
+            }
         default:
             return state
     }
