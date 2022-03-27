@@ -2,8 +2,9 @@ type LocationType = {
     city: string
     country: string
 }
-type UsersType = {
+export type UsersType = {
     id: number
+    photoUrl: string
     followed: boolean
     fullName: string
     status: string
@@ -15,6 +16,7 @@ const initialUsersState = {
     users: [
         {
             id: 1,
+            photoUrl: 'https://jf-staeulalia.pt/img/other/76/collection-epic-face-background-3.png',
             followed: true,
             fullName: 'Max',
             status: 'I am student',
@@ -22,6 +24,7 @@ const initialUsersState = {
         },
         {
             id: 2,
+            photoUrl: 'https://jf-staeulalia.pt/img/other/76/collection-epic-face-background-3.png',
             followed: false,
             fullName: 'Dima',
             status: 'I am student',
@@ -29,6 +32,7 @@ const initialUsersState = {
         },
         {
             id: 3,
+            photoUrl: 'https://jf-staeulalia.pt/img/other/76/collection-epic-face-background-3.png',
             followed: true,
             fullName: 'Alex',
             status: 'I am student',
@@ -37,9 +41,9 @@ const initialUsersState = {
     ] as UsersType[]
 }
 
-type InitialUsersStateAT = typeof initialUsersState
+export type InitialUsersStateType = typeof initialUsersState
 
-export const usersReducer = (state: InitialUsersStateAT = initialUsersState, action: UsersAT): InitialUsersStateAT => {
+export const usersReducer = (state: InitialUsersStateType = initialUsersState, action: UsersAT): InitialUsersStateType => {
     switch (action.type) {
         case "FOLLOW":
             return {

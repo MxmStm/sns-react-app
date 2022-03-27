@@ -27,7 +27,7 @@ function App() {
                             element={<Profile/>}
                         />
                         <Route
-                            path={'/UsersContainer'}
+                            path={'/Users'}
                             element={<UsersContainer/>}
                         />
                         <Route path={'/News'} element={<News/>}/>

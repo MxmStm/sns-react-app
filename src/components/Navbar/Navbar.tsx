@@ -23,6 +23,10 @@ export const Navbar = () => {
                 <NavLink to={'/Setting'}
                          className={(navData => navData.isActive ? s.activeLink : s.item)}>Setting</NavLink>
             </div>
+            <div>
+                <NavLink to={'/Users'}
+                         className={(navData => navData.isActive ? s.activeLink : s.item)}>Users</NavLink>
+            </div>
         </nav>
     )
 }
