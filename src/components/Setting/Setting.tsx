@@ -1,6 +1,5 @@
-const Setting = () => {
+export const Setting = () => {
     return (
         <div>Setting</div>
     )
 }
-export default Setting;
