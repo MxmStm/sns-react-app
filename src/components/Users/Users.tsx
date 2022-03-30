@@ -1,36 +1,31 @@
-import React from 'react';
-import {MapPropsUsersType} from "./UsersContainer";
-import s from './Users.module.css'
+import React from "react";
+import userPhoto from "../../assets/images/user.png";
+import s from "./Users.module.css";
 import axios from "axios";
-import userPhoto from '../../assets/images/user.png'
+import {MapPropsUsersType} from "./UsersContainer";
 
-export const Users = (props: MapPropsUsersType) => {
+export class Users extends React.Component<MapPropsUsersType> {
 
-    const getUsers = () => {
-        if (props.usersPage.users.length === 0) {
-
-            axios.get('https://social-network.samuraijs.com/api/1.0/users')
-                .then(response => {
-                    props.setUsers(response.data.items)
-                })
-
-        }
+    constructor(props: MapPropsUsersType) {
+        super(props);
+        axios.get('https://social-network.samuraijs.com/api/1.0/users')
+            .then(response => {
+                props.setUsers(response.data.items)
+            })
     }
 
-    return (
-        <div>
-
-            <button onClick={getUsers}>Get Users</button>
-
-            {
-                props.usersPage.users.map(u => <div key={u.id}>
+    render() {
+        return (
+            <div>
+                {
+                    this.props.usersPage.users.map(u => <div key={u.id}>
                     <span>
                         <div>
                             <img
                                 src={u.photos.small != null
                                     ? u.photos.small
                                     : userPhoto}
-                                alt={'Photo of user'}
+                                alt={'User'}
                                 className={s.userPhoto}
                             />
                         </div>
@@ -38,20 +33,20 @@ export const Users = (props: MapPropsUsersType) => {
                             {u.followed
                                 ? <button
                                     onClick={() => {
-                                        props.unfollow(u.id)
+                                        this.props.unfollow(u.id)
                                     }}
                                 >
                                     Unfollow
                                 </button>
                                 : <button
                                     onClick={() => {
-                                        props.follow(u.id)
+                                        this.props.follow(u.id)
                                     }}
                                 >Follow
                                 </button>}
                         </div>
                     </span>
-                    <span>
+                        <span>
                         <span>
                             <div>
                                 {u.name}
@@ -61,9 +56,9 @@ export const Users = (props: MapPropsUsersType) => {
                             </div>
                         </span>
                     </span>
-                </div>)
-            }
-        </div>
-    );
-};
-
+                    </div>)
+                }
+            </div>
+        );
+    }
+}
