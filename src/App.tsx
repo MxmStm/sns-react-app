@@ -19,6 +19,10 @@ function App() {
                 <div className={'app-wrapper-content'}>
                     <Routes>
                         <Route
+                            path={'/'}
+                            element={<Profile/>}
+                        />
+                        <Route
                             path={'/Dialogs/*'}
                             element={<DialogsContainer/>}
                         />

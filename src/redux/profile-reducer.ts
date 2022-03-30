@@ -16,7 +16,7 @@ const initialProfileState = {
 
 export type InitialProfileStateType = typeof initialProfileState
 
-export const profileReducer = (state: InitialProfileStateType = initialProfileState, action: ProfileAT | DialogsAT): InitialProfileStateType => {
+export const profileReducer = (state = initialProfileState, action: ProfileAT | DialogsAT): InitialProfileStateType => {
     switch (action.type) {
         case "ADD-POST":
             return {

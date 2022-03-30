@@ -29,7 +29,7 @@ const initialDialogsState = {
 
 export type InitialDialogsStateType = typeof initialDialogsState
 
-export const dialogsReducer = (state: InitialDialogsStateType = initialDialogsState, action: ProfileAT | DialogsAT): InitialDialogsStateType => {
+export const dialogsReducer = (state = initialDialogsState, action: ProfileAT | DialogsAT): InitialDialogsStateType => {
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY":
             return {

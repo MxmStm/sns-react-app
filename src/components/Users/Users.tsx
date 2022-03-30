@@ -2,14 +2,19 @@ import React from 'react';
 import {MapPropsUsersType} from "./UsersContainer";
 import s from './Users.module.css'
 import axios from "axios";
+import userPhoto from '../../assets/images/user.png'
 
 export const Users = (props: MapPropsUsersType) => {
 
     const getUsers = () => {
-        axios.get('https://social-network.samuraijs.com/docs/users')
-            .then(response => {
-                props.setUsers(response.data.items)
-            })
+        if (props.usersPage.users.length === 0) {
+
+            axios.get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => {
+                    props.setUsers(response.data.items)
+                })
+
+        }
     }
 
     return (
@@ -22,7 +27,9 @@ export const Users = (props: MapPropsUsersType) => {
                     <span>
                         <div>
                             <img
-                                src={u.photoUrl}
+                                src={u.photos.small != null
+                                    ? u.photos.small
+                                    : userPhoto}
                                 alt={'Photo of user'}
                                 className={s.userPhoto}
                             />
@@ -47,18 +54,10 @@ export const Users = (props: MapPropsUsersType) => {
                     <span>
                         <span>
                             <div>
-                                {u.fullName}
+                                {u.name}
                             </div>
                             <div>
                                 {u.status}
-                            </div>
-                        </span>
-                        <span>
-                            <div>
-                                {u.location.country}
-                            </div>
-                            <div>
-                                {u.location.city}
                             </div>
                         </span>
                     </span>

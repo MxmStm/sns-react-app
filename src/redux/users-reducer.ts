@@ -1,49 +1,12 @@
-type LocationType = {
-    city: string
-    country: string
-}
-export type UsersType = {
-    id: number
-    photoUrl: string
-    followed: boolean
-    fullName: string
-    status: string
-    location: LocationType
-
-}
+import {UsersType} from "../types/types";
 
 const initialUsersState = {
-    users: [
-        {
-            id: 1,
-            photoUrl: 'https://jf-staeulalia.pt/img/other/76/collection-epic-face-background-3.png',
-            followed: true,
-            fullName: 'Max',
-            status: 'I am student',
-            location: {city: 'Minsk', country: 'Belarus'}
-        },
-        {
-            id: 2,
-            photoUrl: 'https://jf-staeulalia.pt/img/other/76/collection-epic-face-background-3.png',
-            followed: false,
-            fullName: 'Dima',
-            status: 'I am student',
-            location: {city: 'Moscow', country: 'Russia'}
-        },
-        {
-            id: 3,
-            photoUrl: 'https://jf-staeulalia.pt/img/other/76/collection-epic-face-background-3.png',
-            followed: true,
-            fullName: 'Alex',
-            status: 'I am student',
-            location: {city: 'Kiev', country: 'Ukraine'}
-        },
-    ] as UsersType[]
+    users: [] as UsersType[]
 }
 
 export type InitialUsersStateType = typeof initialUsersState
 
-export const usersReducer = (state: InitialUsersStateType = initialUsersState, action: UsersAT): InitialUsersStateType => {
+export const usersReducer = (state = initialUsersState, action: UsersAT): InitialUsersStateType => {
     switch (action.type) {
         case "FOLLOW":
             return {
