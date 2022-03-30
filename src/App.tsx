@@ -23,16 +23,16 @@ function App() {
                             element={<Profile/>}
                         />
                         <Route
-                            path={'/Dialogs/*'}
-                            element={<DialogsContainer/>}
-                        />
-                        <Route
                             path={'/Profile'}
                             element={<Profile/>}
                         />
                         <Route
                             path={'/Users'}
                             element={<UsersContainer/>}
+                        />
+                        <Route
+                            path={'/Dialogs/*'}
+                            element={<DialogsContainer/>}
                         />
                         <Route path={'/News'} element={<News/>}/>
                         <Route path={'/Music'} element={<Music/>}/>

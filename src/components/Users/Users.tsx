@@ -5,12 +5,10 @@ import axios from "axios";
 import {MapPropsUsersType} from "./UsersContainer";
 
 export class Users extends React.Component<MapPropsUsersType> {
-
-    constructor(props: MapPropsUsersType) {
-        super(props);
+    componentDidMount() {
         axios.get('https://social-network.samuraijs.com/api/1.0/users')
             .then(response => {
-                props.setUsers(response.data.items)
+                this.props.setUsers(response.data.items)
             })
     }
 
