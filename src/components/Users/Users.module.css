@@ -2,3 +2,12 @@
     width: 150px;
     height: 100px;
 }
+
+.page {
+    cursor: pointer;
+}
+
+.selectedPage {
+    font-weight: bold;
+    cursor: pointer;
+}

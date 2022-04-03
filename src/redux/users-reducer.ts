@@ -1,7 +1,10 @@
 import {UsersType} from "../types/types";
 
 const initialUsersState = {
-    users: [] as UsersType[]
+    users: [] as UsersType[],
+    pageSize: 100,
+    totalUsersCount: 0,
+    currentPage: 1,
 }
 
 export type InitialUsersStateType = typeof initialUsersState
@@ -25,7 +28,17 @@ export const usersReducer = (state = initialUsersState, action: UsersAT): Initia
         case "SET-USERS":
             return {
                 ...state,
-                users: [...state.users, ...action.user],
+                users: action.user,
+            }
+        case "SET-CURRENT-PAGE":
+            return {
+                ...state,
+                currentPage: action.currentPage
+            }
+        case "SET-TOTAL-USERS-COUNT":
+            return {
+                ...state,
+                totalUsersCount: action.totalUsersCount
             }
         default:
             return state
@@ -50,9 +63,23 @@ export const setUsersAC = (user: UsersType[]) => {
         user,
     } as const
 }
+export const setCurrentPageAC = (currentPage: number) => {
+    return {
+        type: 'SET-CURRENT-PAGE',
+        currentPage,
+    } as const
+}
+export const setTotalUsersCountAC = (totalUsersCount: number) => {
+    return {
+        type: 'SET-TOTAL-USERS-COUNT',
+        totalUsersCount,
+    } as const
+}
 
 type FollowAT = ReturnType<typeof followAC>
 type UnfollowAT = ReturnType<typeof unfollowAC>
 type SetUsersAT = ReturnType<typeof setUsersAC>
+type SetCurrentPageAT = ReturnType<typeof setCurrentPageAC>
+type SetTotalUsersCountAT = ReturnType<typeof setTotalUsersCountAC>
 
-type UsersAT = FollowAT | UnfollowAT | SetUsersAT
+type UsersAT = FollowAT | UnfollowAT | SetUsersAT | SetCurrentPageAT | SetTotalUsersCountAT
