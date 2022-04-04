@@ -8,7 +8,7 @@ import {News} from "./components/News/News";
 import {Music} from "./components/Music/Music";
 import {Setting} from "./components/Setting/Setting";
 import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
-import {UsersContainer} from "./components/Users/UsersContainer";
+import {UsersConnect} from "./components/Users/UsersContainer";
 
 function App() {
     return (
@@ -28,7 +28,7 @@ function App() {
                         />
                         <Route
                             path={'/Users'}
-                            element={<UsersContainer/>}
+                            element={<UsersConnect/>}
                         />
                         <Route
                             path={'/Dialogs/*'}
