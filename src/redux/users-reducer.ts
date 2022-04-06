@@ -51,48 +51,48 @@ export const usersReducer = (state = initialUsersState, action: UsersAT): Initia
     }
 }
 
-export const followAC = (userId: number) => {
+export const follow = (userId: number) => {
     return {
         type: 'FOLLOW',
         userId,
     } as const
 }
-export const unfollowAC = (userId: number) => {
+export const unfollow = (userId: number) => {
     return {
         type: 'UNFOLLOW',
         userId,
     } as const
 }
-export const setUsersAC = (user: UsersType[]) => {
+export const setUsers = (user: UsersType[]) => {
     return {
         type: 'SET-USERS',
         user,
     } as const
 }
-export const setCurrentPageAC = (currentPage: number) => {
+export const setCurrentPage = (currentPage: number) => {
     return {
         type: 'SET-CURRENT-PAGE',
         currentPage,
     } as const
 }
-export const setTotalUsersCountAC = (totalUsersCount: number) => {
+export const setTotalUsersCount = (totalUsersCount: number) => {
     return {
         type: 'SET-TOTAL-USERS-COUNT',
         totalUsersCount,
     } as const
 }
-export const setIsFetchingAC = (isFetching: boolean) => {
+export const toggleIsFetching = (isFetching: boolean) => {
     return {
         type: 'TOGGLE-IS-FETCHING',
         isFetching
     } as const
 }
 
-type FollowAT = ReturnType<typeof followAC>
-type UnfollowAT = ReturnType<typeof unfollowAC>
-type SetUsersAT = ReturnType<typeof setUsersAC>
-type SetCurrentPageAT = ReturnType<typeof setCurrentPageAC>
-type SetTotalUsersCountAT = ReturnType<typeof setTotalUsersCountAC>
-type SetIsFetchingAT = ReturnType<typeof setIsFetchingAC>
+type FollowAT = ReturnType<typeof follow>
+type UnfollowAT = ReturnType<typeof unfollow>
+type SetUsersAT = ReturnType<typeof setUsers>
+type SetCurrentPageAT = ReturnType<typeof setCurrentPage>
+type SetTotalUsersCountAT = ReturnType<typeof setTotalUsersCount>
+type ToggleIsFetchingAT = ReturnType<typeof toggleIsFetching>
 
-type UsersAT = FollowAT | UnfollowAT | SetUsersAT | SetCurrentPageAT | SetTotalUsersCountAT | SetIsFetchingAT
+type UsersAT = FollowAT | UnfollowAT | SetUsersAT | SetCurrentPageAT | SetTotalUsersCountAT | ToggleIsFetchingAT
