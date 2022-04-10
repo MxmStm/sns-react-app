@@ -1,10 +1,5 @@
+import {PostType, ProfileType} from "../types/types";
 import {DialogsAT} from "./dialogs-reducer";
-
-type PostType = {
-    id: number
-    message: string
-    likesCount: number
-}
 
 const initialProfileState = {
     posts: [
@@ -12,6 +7,7 @@ const initialProfileState = {
         {id: 2, message: "It's my first post", likesCount: 20},
     ] as PostType[],
     newPostText: 'NEW POST' as string,
+    profile: null as ProfileType | null
 }
 
 export type InitialProfileStateType = typeof initialProfileState
@@ -33,6 +29,11 @@ export const profileReducer = (state = initialProfileState, action: ProfileAT | 
                 ...state,
                 newPostText: action.newText
             }
+        case "SET-USER-PROFILE":
+            return {
+                ...state,
+                profile: action.profile
+            }
         default:
             return state
     }
@@ -49,6 +50,13 @@ export const onPostChangeAC = (newText: string) => {
         newText
     } as const
 }
+export const setUserProfile = (profile: ProfileType) => {
+    return {
+        type: 'SET-USER-PROFILE',
+        profile
+    } as const
+}
 
 export type ProfileAT = ReturnType<typeof addPostAC>
     | ReturnType<typeof onPostChangeAC>
+    | ReturnType<typeof setUserProfile>

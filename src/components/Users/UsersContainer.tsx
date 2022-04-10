@@ -27,7 +27,7 @@ type MapDispatchPropsType = {
 }
 export type MapPropsUsersType = MapStatePropsType & MapDispatchPropsType
 
-export class UsersContainer extends React.Component<MapPropsUsersType> {
+class UsersContainer extends React.Component<MapPropsUsersType> {
     componentDidMount() {
         this.props.toggleIsFetching(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`)
@@ -73,30 +73,8 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
         usersPage: state.usersPage
     }
 }
-// const mapDispatchToProps = (dispatch: Dispatch): MapDispatchPropsType => {
-//     return {
-//         follow: (userId: number) => {
-//             dispatch(followAC(userId))
-//         },
-//         unfollow: (userId: number) => {
-//             dispatch(unfollowAC(userId))
-//         },
-//         setUsers: (users: UsersType[]) => {
-//             dispatch(setUsersAC(users))
-//         },
-//         setCurrentPage: (pageNumber: number) => {
-//             dispatch(setCurrentPageAC(pageNumber))
-//         },
-//         setTotalUsersCount: (totalCount: number) => {
-//             dispatch(setTotalUsersCountAC(totalCount))
-//         },
-//         toggleIsFetching: (isFetching: boolean) => {
-//             dispatch(toggleIsFetchingAC(isFetching))
-//         },
-//     }
-// }
 
-export const UsersConnect = connect(mapStateToProps, {
+export default connect(mapStateToProps, {
     follow,
     unfollow,
     setUsers,
