@@ -37,3 +37,9 @@ export type ProfileType = {
     contacts: ContactsType
     photos: PhotosProfileType
 }
+
+export type DataAuthType = {
+    id: number
+    email: string
+    login: string
+}

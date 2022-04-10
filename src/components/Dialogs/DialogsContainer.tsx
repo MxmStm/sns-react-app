@@ -2,7 +2,7 @@ import {ChangeEvent} from "react";
 import {InitialDialogsStateType, sendMessageAC, updateNewMessageBodyAC} from "../../redux/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/store";
 import {Dispatch} from "redux";
 
 type MapStatePropsType = {

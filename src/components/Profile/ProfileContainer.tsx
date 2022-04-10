@@ -2,7 +2,7 @@ import React, {JSXElementConstructor} from "react";
 import {Profile} from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
-import {AppStateType} from "../../redux/redux-store";
+import {AppStateType} from "../../redux/store";
 import {ProfileType} from "../../types/types";
 import {setUserProfile} from "../../redux/profile-reducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
@@ -13,8 +13,7 @@ type MapStatePropsType = {
 type MapDispatchPropsType = {
     setUserProfile: (profile: ProfileType) => void
 }
-
-export type MapPropsProfileType = MapStatePropsType & MapDispatchPropsType
+type MapPropsProfileType = MapStatePropsType & MapDispatchPropsType
 
 class ProfileContainer extends React.Component<MapPropsProfileType> {
     componentDidMount() {
