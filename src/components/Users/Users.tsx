@@ -13,6 +13,8 @@ type UsersComponentType = {
     users: UsersType[]
     follow: (id: number) => void
     unfollow: (id: number) => void
+    toggleIsFollowingProgress: (isFetching: boolean, userId: number) => void
+    followingInProgress: number[]
 }
 
 export const Users = (props: UsersComponentType) => {
@@ -51,8 +53,9 @@ export const Users = (props: UsersComponentType) => {
                         <div>
                             {u.followed
                                 ? <button
+                                    disabled={props.followingInProgress.some(id => id === u.id)}
                                     onClick={() => {
-
+                                        props.toggleIsFollowingProgress(true, u.id)
                                         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {
                                             withCredentials: true,
                                             headers: {'API-KEY': '193fc14b-7133-4358-b157-8b260b27418c'}
@@ -61,6 +64,7 @@ export const Users = (props: UsersComponentType) => {
                                                 if (response.data.resultCode === 0) {
                                                     props.unfollow(u.id)
                                                 }
+                                                props.toggleIsFollowingProgress(false, u.id)
                                             })
 
                                     }}
@@ -68,8 +72,9 @@ export const Users = (props: UsersComponentType) => {
                                     Unfollow
                                 </button>
                                 : <button
+                                    disabled={props.followingInProgress.some(id => id === u.id)}
                                     onClick={() => {
-
+                                        props.toggleIsFollowingProgress(true, u.id)
                                         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {}, {
                                             withCredentials: true,
                                             headers: {'API-KEY': '193fc14b-7133-4358-b157-8b260b27418c'}
@@ -78,6 +83,7 @@ export const Users = (props: UsersComponentType) => {
                                                 if (response.data.resultCode === 0) {
                                                     props.follow(u.id)
                                                 }
+                                                props.toggleIsFollowingProgress(false, u.id)
                                             })
 
                                     }}
