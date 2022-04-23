@@ -3,6 +3,7 @@ import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {MapPropsDialogsType} from "./DialogsContainer";
+import {Navigate} from "react-router-dom";
 
 const Dialogs = (props: MapPropsDialogsType) => {
     const dialogsElements = props.dialogsPage.dialogs.map(d =>
@@ -16,6 +17,10 @@ const Dialogs = (props: MapPropsDialogsType) => {
     }
     const onNewMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         props.updateNewMessageBody(e)
+    }
+
+    if (!props.isAuth) {
+        return <Navigate to={'/login'}/>
     }
 
     return (
