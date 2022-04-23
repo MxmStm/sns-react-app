@@ -1,5 +1,7 @@
 import {PostType, ProfileType} from "../types/types";
 import {DialogsAT} from "./dialogs-reducer";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 const initialProfileState = {
     posts: [
@@ -60,3 +62,12 @@ export const setUserProfile = (profile: ProfileType) => {
 export type ProfileAT = ReturnType<typeof addPostAC>
     | ReturnType<typeof onPostChangeAC>
     | ReturnType<typeof setUserProfile>
+
+export const getUserProfile = (userID: number) => {
+    return (dispatch: Dispatch) => {
+        usersAPI.getProfile(userID)
+            .then(response => {
+                dispatch(setUserProfile(response.data))
+            })
+    }
+}
