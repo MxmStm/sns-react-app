@@ -1,4 +1,4 @@
-import React, {JSXElementConstructor} from "react";
+import React, {ComponentType, JSXElementConstructor} from "react";
 import {Profile} from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/store";
@@ -6,10 +6,10 @@ import {ProfileType} from "../../types/types";
 import {getUserProfile} from "../../redux/profile-reducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
 
 type MapStatePropsType = {
     profile: ProfileType | null
-    isAuth: boolean
 }
 type MapDispatchPropsType = {
     setUserProfile: (profile: ProfileType) => void
@@ -34,16 +34,14 @@ class ProfileContainer extends React.Component<MapPropsProfileType> {
     }
 }
 
-const AuthRedirectComponent = withAuthRedirect(ProfileContainer)
-
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
-        profile: state.profilePage.profile,
-        isAuth: state.auth.isAuth,
+        profile: state.profilePage.profile
     }
 }
 
 export const withRouter = (Component: JSXElementConstructor<any>): JSXElementConstructor<any> => {
+
     function ComponentWithRouterProp(props: any) {
         let location = useLocation();
         let navigate = useNavigate();
@@ -59,7 +57,10 @@ export const withRouter = (Component: JSXElementConstructor<any>): JSXElementCon
     return ComponentWithRouterProp;
 }
 
-export default connect(mapStateToProps, {
-    getUserProfile
-})(withRouter(AuthRedirectComponent))
-
+export default compose<ComponentType>(
+    connect(mapStateToProps, {
+        getUserProfile
+    }),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer)
