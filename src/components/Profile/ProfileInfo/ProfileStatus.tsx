@@ -1,12 +1,14 @@
-import React, {Component} from 'react';
+import React, {ChangeEvent, Component} from 'react';
 
 type ProfileStatusType = {
     status: string
+    updateStatus: (status: string) => void
 }
 
 export class ProfileStatus extends Component<ProfileStatusType> {
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
 
     activateEditMode = () => {
@@ -18,6 +20,12 @@ export class ProfileStatus extends Component<ProfileStatusType> {
         this.setState({
             editMode: false
         })
+        this.props.updateStatus(this.state.status)
+    }
+    onStatusChange = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
+        })
     }
 
     render() {
@@ -27,16 +35,18 @@ export class ProfileStatus extends Component<ProfileStatusType> {
                     <div>
                         <span
                             onDoubleClick={this.activateEditMode}
-                        >{this.props.status}
+                        >
+                            {this.props.status || '-------'}
                         </span>
                     </div>
                 }
                 {this.state.editMode &&
                     <div>
                         <input
+                            onChange={this.onStatusChange}
                             autoFocus={true}
                             onBlur={this.deactivateEditMode}
-                            value={this.props.status}
+                            value={this.state.status}
                         />
                     </div>
                 }
@@ -44,4 +54,3 @@ export class ProfileStatus extends Component<ProfileStatusType> {
         )
     }
 }
-
