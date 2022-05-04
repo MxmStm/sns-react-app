@@ -1,15 +1,17 @@
 {
   "files": {
-    "main.css": "/sns-react-app/static/css/main.f03d204d.css",
-    "main.js": "/sns-react-app/static/js/main.11d4ceb0.js",
+    "main.css": "/sns-react-app/static/css/main.bf0da765.css",
+    "main.js": "/sns-react-app/static/js/main.ef171166.js",
     "static/js/787.f3613067.chunk.js": "/sns-react-app/static/js/787.f3613067.chunk.js",
+    "static/media/user.png": "/sns-react-app/static/media/user.76a001d0c402b5637a97.png",
+    "static/media/preloader.svg": "/sns-react-app/static/media/preloader.e640036d5a9f219e4632825891163b0e.svg",
     "index.html": "/sns-react-app/index.html",
-    "main.f03d204d.css.map": "/sns-react-app/static/css/main.f03d204d.css.map",
-    "main.11d4ceb0.js.map": "/sns-react-app/static/js/main.11d4ceb0.js.map",
+    "main.bf0da765.css.map": "/sns-react-app/static/css/main.bf0da765.css.map",
+    "main.ef171166.js.map": "/sns-react-app/static/js/main.ef171166.js.map",
     "787.f3613067.chunk.js.map": "/sns-react-app/static/js/787.f3613067.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.f03d204d.css",
-    "static/js/main.11d4ceb0.js"
+    "static/css/main.bf0da765.css",
+    "static/js/main.ef171166.js"
   ]
 }
