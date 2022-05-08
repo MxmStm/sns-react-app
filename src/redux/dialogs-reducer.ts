@@ -17,7 +17,6 @@ const initialDialogsState = {
         {id: 4, message: 'Yo'},
         {id: 5, message: 'Yo'},
     ] as MessageType[],
-    newMessageBody: '' as string,
     dialogs: [
         {id: 1, name: 'Max'},
         {id: 2, name: 'Bob'},
@@ -31,35 +30,23 @@ export type InitialDialogsStateType = typeof initialDialogsState
 
 export const dialogsReducer = (state = initialDialogsState, action: ProfileAT | DialogsAT): InitialDialogsStateType => {
     switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-BODY":
-            return {
-                ...state,
-                newMessageBody: action.body
-            }
         case "SEND-MESSAGE":
             return {
                 ...state,
                 messages: [...state.messages, {
-                    id: 6, message: state.newMessageBody
-                }],
-                newMessageBody: ''
+                    id: 6, message: action.newMessageBody
+                }]
             }
         default:
             return state
     }
 }
 
-export const updateNewMessageBodyAC = (body: string) => {
+export const sendMessageAC = (newMessageBody: string) => {
     return {
-        type: 'UPDATE-NEW-MESSAGE-BODY',
-        body
-    } as const
-}
-export const sendMessageAC = () => {
-    return {
-        type: 'SEND-MESSAGE'
+        type: 'SEND-MESSAGE',
+        newMessageBody
     } as const
 }
 
-export type DialogsAT = ReturnType<typeof updateNewMessageBodyAC>
-    | ReturnType<typeof sendMessageAC>
+export type DialogsAT = ReturnType<typeof sendMessageAC>
