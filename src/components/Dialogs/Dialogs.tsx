@@ -10,7 +10,7 @@ const Dialogs = (props: MapPropsDialogsType) => {
         <DialogItem name={d.name} id={(d.id)}/>)
     const messagesElements = props.dialogsPage.messages.map(m =>
         <Message message={m.message}/>)
-    const addNewMessage = (value: any) => {
+    const addNewMessage = (value: FormDataDialogsType) => {
         props.sendMessage(value.newMessageBody)
     }
 

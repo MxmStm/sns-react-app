@@ -8,7 +8,7 @@ export const MyPosts = (props: MapPropsMyPostType) => {
     const postsElements = props.profilePage.posts.map(p =>
         <Post message={p.message} likesCount={p.likesCount}/>)
 
-    const onAddPost = (value: any) => {
+    const onAddPost = (value: FormDataPostType) => {
         props.addPost(value.newPostText)
     }
 
