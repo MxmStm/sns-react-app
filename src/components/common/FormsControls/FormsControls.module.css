@@ -7,3 +7,9 @@
     background-color: red;
     color: white;
 }
+
+.formSummaryError {
+    border: 1px solid red;
+    padding: 5px;
+    color: red;
+}

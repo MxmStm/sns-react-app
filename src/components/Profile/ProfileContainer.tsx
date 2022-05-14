@@ -5,12 +5,13 @@ import {AppStateType} from "../../redux/store";
 import {ProfileType} from "../../types/types";
 import {getUserProfile, getUserStatus, updateStatus} from "../../redux/profile-reducer";
 import {useLocation, useNavigate, useParams} from "react-router-dom";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 type MapStatePropsType = {
     profile: ProfileType | null
     status: string
+    authorizedUserId: number | undefined
+    isAuth: boolean
 }
 type MapDispatchPropsType = {
     getUserProfile: (userID: number) => void
@@ -24,7 +25,7 @@ class ProfileContainer extends React.Component<MapPropsProfileType> {
         //@ts-ignore
         let userID = this.props.router.params.userID
         if (!userID) {
-            userID = 15
+            userID = this.props.authorizedUserId
         }
         this.props.getUserProfile(userID)
         this.props.getUserStatus(userID)
@@ -44,7 +45,9 @@ class ProfileContainer extends React.Component<MapPropsProfileType> {
 const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     return {
         profile: state.profilePage.profile,
-        status: state.profilePage.status
+        status: state.profilePage.status,
+        authorizedUserId: state.auth.data?.id,
+        isAuth: state.auth.isAuth
     }
 }
 

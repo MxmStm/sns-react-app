@@ -3,6 +3,7 @@ import {Dispatch} from "redux";
 import {authAPI} from "../api/api";
 import {ThunkAction} from "redux-thunk";
 import {AppStateType} from "./store";
+import {stopSubmit} from "redux-form";
 
 const initialAuthState = {
     data: null as DataAuthType | null,
@@ -31,8 +32,6 @@ export const setAuthUserData = (data: DataAuthType | null, isAuth: boolean) => {
     } as const
 }
 
-type AuthAT = ReturnType<typeof setAuthUserData>
-
 export const getAuthUserData = () => {
     return (dispatch: Dispatch) => {
         authAPI.me()
@@ -49,6 +48,9 @@ export const login = (email: string, password: string, rememberMe: boolean): Thu
             .then(response => {
                 if (response.data.resultCode === 0) {
                     dispatch(getAuthUserData())
+                } else {
+                    const message = response.data.message.length > 0 ? response.data.message[0] : 'Some error'
+                    dispatch(stopSubmit('login', {_error: message}))
                 }
             })
     }
@@ -64,4 +66,8 @@ export const logout = () => {
     }
 }
 
-type ThunkType = ThunkAction<void, AppStateType, unknown, AuthAT>
+type AuthAT = ReturnType<typeof setAuthUserData>
+type StopSubmitType = ReturnType<typeof stopSubmit>
+type ThunkType = ThunkAction<void, AppStateType, unknown, CommonActionType>
+
+type CommonActionType = AuthAT | StopSubmitType
