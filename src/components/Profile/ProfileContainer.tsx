@@ -52,7 +52,6 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
 }
 
 export const withRouter = (Component: JSXElementConstructor<any>): JSXElementConstructor<any> => {
-
     function ComponentWithRouterProp(props: any) {
         let location = useLocation();
         let navigate = useNavigate();
@@ -75,5 +74,4 @@ export default compose<ComponentType>(
         updateStatus
     }),
     withRouter,
-    // withAuthRedirect
 )(ProfileContainer)
